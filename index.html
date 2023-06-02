@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Galería de Imágenes</title>
+  <style>
+    /* Estilos CSS para la galería */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    background-color: rgb(223, 223, 223);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .modal-title {
+      font-size: 50px;
+      text-align: center;
+    }
+.cantidad {
+  display: inline;
+   font-size: 50px;
+   margin-left: 30px;
+   margin-right: 10px;
+}
+.total {
+  display: inline;
+   font-size: 50px;
+}
+    .gallery-item {
+      position: relative;
+      margin: 10px;
+      box-shadow:5px 5px 5px 5px rgba(49, 49, 49, 0.158);
+background-color: rgb(255, 255, 255);
+border-radius: 10px ;
+      cursor: pointer;
+      text-align:  center;
+      height: auto;
+    }
+
+    .gallery-item img {
+
+      width: 450px;
+      height: 450px;
+      object-fit: contain;
+   
+    }
+
+    .gallery-item .title {
+      margin-top: 0px;
+      font-size: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  .title {
+      margin: 20px;
+      padding-top: 30px;
+      font-size: 20px;
+
+
+
+    }
+
+
+    .modal {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgb(0, 0, 0);
+      z-index: 9999;
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      height: 100vh;
+      color: white;
+
+    }
+
+    .modal-content img {
+      background-size: contain;
+     
+      width: 95vw;
+      height: auto;
+      max-height: 60vh;
+    }
+
+    .comments {
+      display: flex;
+      flex-direction: column;
+      /*align-items: center;*/
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 50px;
+    }
+     .nmenos {
+font-size: 50px;
+width: 100px;
+margin: 0px 0px 0px 10px;
+border-radius: 30px;
+    }
+
+     .bmas {
+font-size: 50px;
+width: 100px;
+margin-left: 20px;
+border-radius: 30px;
+    }  
+    
+    
+    button {
+    font-size:  50px;
+    }
+    .comment {
+      display: flex;
+      flex-direction: row;
+      
+justify-content: space-between;
+ 
+      margin-bottom: 10px;
+    }
+    .comment-button {
+      display: flex;
+
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .comment-buttons1 {
+      display: flex !important; 
+
+      align-items: start;
+     
+    }
+    .comment-buttons {
+      display: flex !important; 
+
+      align-items: end;
+     
+    }
+    .comment-text {
+      margin-left: 10px;
+    }
+
+    .center-comment {
+      display: inline;
+      text-align: center;
+      margin-left: 30px;
+      margin-top: 20px;
+      font-weight: bolder;
+      color: #00ff37;
+    }
+
+    .close-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #5d1b1b;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+    .button-enviar {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00da6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .close-button:hover {
+      background-color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="encabezado">
+
+
+</div>
+  <div class="gallery">
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div class="card">
+
+    <h5 class="Titulo">${data[i].Producto}</h5>
+    <img class="image" src=./img/${data[i].imagen}.jpg <div id="precios">
+    
+
+    
+    </div>
+    
+    
+    <div class="overlay">
+    
+    <div class="overlay-content">
+    
+      <h6>${data[i].Producto}</h6>
+    
+      <div class="calculo">
+        <div>
+          <p id="CantidadCajaCompleta${i}"></p>
+          <p class="text-black"> Caja X ${formateador.format(data[i].caja.toFixed(2))} c/u = </p>
+    
+        </div>
+    
+        <div>
+          <p id="cajaCompletaXCantidad${i}">0,000.00</p>
+          <button class = "bmas" type="button" id="sumacajacompleta">+</button>
+          <button class = "nmenos" type="button" id="restacajacompleta">-</button>
+        </div>
+      </div>
+    
+      <div class="calculo">
+        <div>
+          <p id="cantidadMediaCaja${i}"></p>
+          <p class="text-black"> Media X ${formateador.format(data[i].mediacaja.toFixed(2))} c/u = </p>
+    
+        </div>
+    
+        <div>
+          <p id="mediacajaXcantidad${i}">0,000.00</p>
+          <button class = "bmas" type="button" id="sumamediacaja">+</button>
+          <button class = "nmenos" type="button" id="restamediacaja">-</button>
+        </div>
+      </div>
+    
+      <div class="calculo">
+        <div>
+          <p id="cantidadUnidad${i}"></p>
+          <p class="text-black"> Unidad X ${formateador.format(data[i].unidad.toFixed(2))} c/u = </p>
+    
+        </div>
+    
+        <div>
+          <p id="unidadXcantidad${i}">0,000.00</p>
+          <button class = "bmas" type="button" id="sumaUnidad">+</button>
+          <button class = "nmenos" type="button" id="restaUnidad">-</button>
+        </div>
+      </div>
+    
+    
+      <div class="total">
+    
+        <div>
+          <p class="total" id="cajaCompletaXCantidadT">Total = </p>
+          <p class="total" id="totalCajas${i}"></p>
+        </div>
+    
+        <button class="button" type="button" id="prefacturar">Enviar Prefactura</button>
+        
+      </div>
+    
+    </div>
+    
+    
+    </div>
+     -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="./logica.js" type="module"></script>
+
+
+
+
+
+
+</body>
+
+</html>
